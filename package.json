@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
     "test": "jest"
   },
   "dependencies": {
