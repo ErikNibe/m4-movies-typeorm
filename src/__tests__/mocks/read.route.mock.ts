@@ -1,6 +1,6 @@
 import { DeepPartial, Repository } from 'typeorm';
 import { AppDataSource } from '../../data-source';
-import { Movie } from '../../entities';
+import { Movie } from '../../entities/movies.entity';
 
 type iMovieRepo = Repository<Movie>;
 type iMovieDeepPartial = DeepPartial<Movie>;

@@ -1,10 +1,12 @@
+import { DeepPartial } from "typeorm";
 import { z } from "zod";
-import { movieRequestSchema, movieSchema, moviesSchema } from "../schemas/movies.schemas";
+import { movieCreateSchema, movieSchema, moviesSchema, movieUpdateSchema } from "../schemas/movies.schemas";
 
 
-type tMovieRequest = z.infer<typeof movieRequestSchema>;
+type tMovieRequest = z.infer<typeof movieCreateSchema>;
 type tMovie = z.infer<typeof movieSchema>;
 type tMovies = z.infer<typeof moviesSchema>;
+type tMovieUpdateRequest = DeepPartial<tMovieRequest>;
 
 type tSortAcceptableKeys = "price" | "duration";
 type tOrderAcceptableKeys = "ASC" | "DESC";
@@ -14,5 +16,6 @@ export {
     tMovie,
     tMovies,
     tSortAcceptableKeys,
-    tOrderAcceptableKeys
+    tOrderAcceptableKeys,
+    tMovieUpdateRequest
 };

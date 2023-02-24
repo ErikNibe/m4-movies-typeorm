@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
-import { tOrderAcceptableKeys, tSortAcceptableKeys } from "../interfaces/movies.interfaces";
+import { tMovie, tOrderAcceptableKeys, tSortAcceptableKeys } from "../interfaces/movies.interfaces";
 import createMovieService from "../services/createMovie.services";
+import deleteMovieService from "../services/deleteMovie.services";
 import { listAllMoviesService, listMoviesNextPageService, listMoviesService } from "../services/listMovies.services";
+import updateMovieService from "../services/updateMovie.services";
 
 
 const createMovieController = async (req: Request, res: Response): Promise<Response> => {
@@ -29,7 +31,7 @@ const listMoviesController = async (req: Request, res: Response): Promise<Respon
     const movies = await listMoviesService(perPage, page, sort, order, sortIsRequiredKey, orderIsRequiredKey);
 
     const baseURL: string = "http://localhost:3000/movies";
-    let prevPage: string | null = `${baseURL}?page=${parseInt(page)}&perPage=${parseInt(perPage)}`;
+    let prevPage: string | null = `${baseURL}?page=${parseInt(page) - 1}&perPage=${parseInt(perPage)}`;
     let nextPage: string | null = `${baseURL}?page=${parseInt(page) + 1}&perPage=${parseInt(perPage)}`;
 
     if (parseInt(page) === 1) {
@@ -56,7 +58,26 @@ const listMoviesController = async (req: Request, res: Response): Promise<Respon
     return res.json(moviesWithPage);
 };
 
+const updateMovieController = async (req: Request, res: Response): Promise<Response> => {
+
+    const { body, params } = req;
+    const idMovie: number = parseInt(params.id);
+
+    const updatedMovie: tMovie = await updateMovieService(body, idMovie);
+
+    return res.json(updatedMovie);
+};
+
+const deleteMovieController = async (req: Request, res: Response): Promise<Response> => {
+
+    await deleteMovieService(parseInt(req.params.id));
+
+    return res.status(204).send();
+};
+
 export {
     createMovieController,
-    listMoviesController
+    listMoviesController,
+    updateMovieController,
+    deleteMovieController
 };

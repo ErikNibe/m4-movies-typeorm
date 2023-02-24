@@ -6,18 +6,22 @@ import { AppError } from "../errors";
 
 const verifyMovieNameExists = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 
-    const movieRepo: Repository<Movie> = AppDataSource.getRepository(Movie);
-
-    const foundMovie = await movieRepo.findOne({
-        where: {
-            name: req.body.name
-        }
-    });
+    const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
     
-    if (foundMovie) {
+    if (req.body.name) {
+
+        const foundMovie = await movieRepository.findOne({
+            where: {
+                name: req.body.name
+            }
+        });
         
-        throw new AppError("Movie alredy exists.", 400);
+        if (foundMovie) {
+            
+            throw new AppError("Movie already exists.", 409);
+        };
     };
+
 
     return next();
 };

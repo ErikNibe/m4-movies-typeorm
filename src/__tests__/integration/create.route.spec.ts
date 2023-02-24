@@ -2,8 +2,8 @@ import supertest from 'supertest';
 import { DataSource } from 'typeorm';
 import app from '../../app';
 import { AppDataSource } from '../../data-source';
-import { Movie } from '../../entities';
-import { iMovieRepo } from '../../interfaces';
+import { Movie } from '../../entities/movies.entity';
+import { iMovieRepo } from '../../__tests__/interfaces';
 import { createRouteMock } from '../mocks';
 
 describe('POST /movies', () => {

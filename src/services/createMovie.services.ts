@@ -6,10 +6,10 @@ import { movieSchema } from "../schemas/movies.schemas";
 
 const createMovieService = async (payload: tMovieRequest): Promise<tMovie> => {
 
-    const movieRepo: Repository<Movie> = AppDataSource.getRepository(Movie);
+    const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie);
 
-    const movie = movieRepo.create(payload);
-    await movieRepo.save(movie);
+    const movie = movieRepository.create(payload);
+    await movieRepository.save(movie);
 
     const newMovie = movieSchema.parse(movie);
 
