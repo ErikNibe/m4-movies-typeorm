@@ -11,11 +11,19 @@ type tMovieUpdateRequest = DeepPartial<tMovieRequest>;
 type tSortAcceptableKeys = "price" | "duration";
 type tOrderAcceptableKeys = "ASC" | "DESC";
 
+interface iMoviesWithPage {
+    prevPage: string | null,
+    nextPage: string | null,
+    count: number,
+    data: tMovies
+};
+
 export {
     tMovieRequest,
     tMovie,
     tMovies,
     tSortAcceptableKeys,
     tOrderAcceptableKeys,
-    tMovieUpdateRequest
+    tMovieUpdateRequest,
+    iMoviesWithPage
 };
