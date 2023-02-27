@@ -1,6 +1,6 @@
 import { DeepPartial } from "typeorm";
 import { z } from "zod";
-import { movieCreateSchema, movieSchema, moviesSchema, movieUpdateSchema } from "../schemas/movies.schemas";
+import { movieCreateSchema, movieSchema, moviesSchema } from "../schemas/movies.schemas";
 
 
 type tMovieRequest = z.infer<typeof movieCreateSchema>;
